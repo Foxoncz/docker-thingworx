@@ -1,0 +1,22 @@
+version: '2'
+services:
+  db:
+    container_name: twpg
+    build:
+      context: .
+      dockerfile: Dockerfile.postgres
+    restart: always
+    ports:
+      - "5432:5432"
+  web:
+    container_name: twtc
+    build:
+      context: .
+      dockerfile: Dockerfile.tomcat
+    restart: always
+    depends_on:
+      - db
+    links:
+      - db
+    ports:
+      - "80:8080"

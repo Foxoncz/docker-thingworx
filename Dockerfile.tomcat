@@ -1,0 +1,10 @@
+FROM tomcat:8-jre8
+
+COPY /tw/Thingworx.war /usr/local/tomcat/webapps
+COPY /platform-settings.json /ThingworxPlatform/platform-settings.json
+
+RUN mkdir /ThingworxStorage /ThingworxBackupStorage && \
+    chown www-data:www-data /ThingworxStorage /ThingworxBackupStorage /ThingworxPlatform  && \
+    chmod 775 /ThingworxStorage /ThingworxBackupStorage /ThingworxPlatform && \
+    chown www-data:www-data $CATALINA_HOME/webapps/Thingworx.war && \
+    chmod 775 $CATALINA_HOME/webapps/Thingworx.war

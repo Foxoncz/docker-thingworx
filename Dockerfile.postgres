@@ -1,0 +1,8 @@
+FROM postgres:9
+
+COPY /tw/install/ /twpginit/
+COPY /twpg_init.sh /docker-entrypoint-initdb.d/
+
+RUN mkdir /ThingworxPostgresqlStorage && \
+    chmod 775 /ThingworxPostgresqlStorage  && \
+    chown postgres:postgres /ThingworxPostgresqlStorage

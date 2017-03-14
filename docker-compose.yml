@@ -1,4 +1,4 @@
-version: '2'
+version: '2.1'
 services:
   db:
     container_name: twpg
@@ -8,6 +8,12 @@ services:
     restart: always
     ports:
       - "5432:5432"
+    healthcheck:
+      test: "pg_isready -h localhost -p 5432 -q -U postgres"
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
   web:
     container_name: twtc
     build:
@@ -15,8 +21,10 @@ services:
       dockerfile: Dockerfile.tomcat
     restart: always
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     links:
       - db
     ports:
       - "80:8080"
+

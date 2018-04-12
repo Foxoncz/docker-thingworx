@@ -3,7 +3,7 @@
 		"PostgresPersistenceProviderPackage": {
 			"ConnectionInformation": {
 				"jdbcUrl": "jdbc:postgresql://db:5432/thingworx",
-				"password": "thingworx",
+				"password": "password",
 				"username": "twadmin"
 			}
 		}
